@@ -1,0 +1,42 @@
+{% extends 'Obg.html' %}
+
+{%  block content %}
+    <style>
+    textarea{width: 100%;height: 100px}
+    </style>
+{% for message in msg  %}
+   <div class="row">
+   {% if message.autor != user %}
+               <div class="col-md-6 text-left">
+        <div class="alert alert-info">
+            <h6>{{ message.autor }}</h6>
+            {{ message.message }}
+        </div>
+
+        </div>
+
+          <div class="col-md-6"></div>
+
+
+   {% endif %}
+   {% if message.autor == user %}
+       <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
+        <div class="alert alert-info">
+            <h6>{{ message.autor }}</h6>
+            {{ message.message }}
+        </div>
+
+        </div>
+   {% endif %}
+   </div>
+{% endfor %}
+
+    <form action="" method="post">
+    {% csrf_token %}
+
+{{ form.message}}
+    <button type='' class="btn-success">Send</button>
+    </form>
+
+{% endblock %}
